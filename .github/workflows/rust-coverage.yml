@@ -41,6 +41,7 @@ jobs:
           name: coverage-report
           path: |
             lcov.info
+            my-clippy-report.json
             sonar-issues.json
 
   codecov:
@@ -87,3 +88,4 @@ jobs:
         with:
           args: >
             -Dsonar.externalIssuesReportPaths=sonar-issues.json
+            -Dsonar.rust.clippy.reportPaths=my-clippy-report.json
