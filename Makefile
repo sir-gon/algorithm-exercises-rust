@@ -90,6 +90,9 @@ update: dependencies outdated
 upgrade: update
 
 clean:
+	rm -vf lcov.info
+	rm -vf my-clippy-report.json
+	rm -vf sonar-issues.json
 	rm -vfr ./target || true
 	mkdir -p ./target
 	touch ./target/.gitkeep
