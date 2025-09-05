@@ -1,5 +1,8 @@
 my-clippy-report.json
 sonar-issues.json
+
+lcov.info
+
 /target
 
 
