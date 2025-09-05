@@ -1,14 +1,12 @@
 # Algorithm Exercises (Rust 🦀)
 
 [![Rust on Linux CI Test](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust.yml)
-
 [![Markdown Lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/markdown-lint.yml)
 [![YAML lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/yamllint.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/yamllint.yml)
 
 ![GitHub](https://img.shields.io/github/license/sir-gon/algorithm-exercises-rust)
 ![GitHub language count](https://img.shields.io/github/languages/count/sir-gon/algorithm-exercises-rust)
 ![GitHub top language](https://img.shields.io/github/languages/top/sir-gon/algorithm-exercises-rust)
-
 [![codecov](https://codecov.io/gh/sir-gon/algorithm-exercises-rust/branch/main/graph/badge.svg?token=YZ41BE67E4)](https://codecov.io/gh/sir-gon/algorithm-exercises-rust)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sir-gon_algorithm-exercises-rust&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sir-gon_algorithm-exercises-rust)
