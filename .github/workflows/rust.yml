@@ -1,5 +1,5 @@
 ---
-name: Rust
+name: Rust Test
 
 on: # yamllint disable-line rule:truthy
   push:

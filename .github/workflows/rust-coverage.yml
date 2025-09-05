@@ -1,5 +1,5 @@
 ---
-name: Coverage
+name: Rust Coverage
 
 on: # yamllint disable-line rule:truthy
   push:
@@ -11,6 +11,7 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   coverage:
+    name: Rust Coverage
     runs-on: ubuntu-latest
     env:
       CARGO_TERM_COLOR: always
