@@ -86,8 +86,9 @@ coverage/html:
 outdated:
 
 update: dependencies outdated
+	$(PACKAGE_MANAGER) chef prepare --recipe-path recipe.json
 
-upgrade: update
+upgrade:
 
 clean:
 	rm -vf lcov.info
@@ -100,35 +101,40 @@ clean:
 build: env dependencies
 	$(PACKAGE_MANAGER) build
 
-# compose/build: env
-# 	${DOCKER_COMPOSE} --profile lint build
-# 	${DOCKER_COMPOSE} --profile testing build
-# 	${DOCKER_COMPOSE} --profile production build
+build/debug: build
 
-# compose/rebuild: env
-# 	${DOCKER_COMPOSE} --profile lint build --no-cache
-# 	${DOCKER_COMPOSE} --profile testing build --no-cache
-# 	${DOCKER_COMPOSE} --profile production build
+build/release: env dependencies
+	$(PACKAGE_MANAGER) build --release
 
-# compose/lint/markdown: compose/build
-# 	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-go-lint make lint/markdown
+compose/build: env
+	${DOCKER_COMPOSE} --profile lint build
+	${DOCKER_COMPOSE} --profile testing build
+	${DOCKER_COMPOSE} --profile production build
 
-# compose/lint/yaml: compose/build
-# 	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-go-lint make lint/yaml
+compose/rebuild: env
+	${DOCKER_COMPOSE} --profile lint build --no-cache
+	${DOCKER_COMPOSE} --profile testing build --no-cache
+	${DOCKER_COMPOSE} --profile production build
 
-# compose/test/styling: compose/build
-# 	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-go-lint make test/styling
+compose/lint/markdown: compose/build
+	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make lint/markdown
 
-# compose/test/static: compose/build
-# 	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-go-lint make test/static
+compose/lint/yaml: compose/build
+	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make lint/yaml
 
-# compose/lint: compose/lint/markdown compose/lint/yaml compose/test/styling compose/test/static
+compose/test/styling: compose/build
+	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make test/styling
 
-# compose/test: compose/build
-# 	${DOCKER_COMPOSE} --profile testing run --rm algorithm-exercises-go-test make test
+compose/test/static: compose/build
+	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make test/static
 
-# compose/run: compose/build
-# 	${DOCKER_COMPOSE} --profile production run --rm algorithm-exercises-go
+compose/lint: compose/lint/markdown compose/lint/yaml compose/test/styling compose/test/static
+
+compose/test: compose/build
+	${DOCKER_COMPOSE} --profile testing run --rm algorithm-exercises-rust-test make test
+
+compose/run: compose/build
+	${DOCKER_COMPOSE} --profile production run --rm algorithm-exercises-rust
 
 all: test coverage
 

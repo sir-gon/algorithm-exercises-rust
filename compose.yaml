@@ -1,0 +1,49 @@
+---
+services:
+  algorithm-exercises-rust-test:
+    image: algorithm-exercises-rust:test
+    build:
+      context: .
+      target: testing
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-info} ## (1) ## info | debug
+      BRUTEFORCE: ${BRUTEFORCE:-false} ## (1) ## true | false
+    profiles: ["testing"]
+
+  algorithm-exercises-rust-lint:
+    image: algorithm-exercises-rust:lint
+    build:
+      context: .
+      target: lint
+    # environment:
+    #   LOG_LEVEL: ${LOG_LEVEL:-info} ## (1) ## info | debug
+    #   BRUTEFORCE: ${BRUTEFORCE:-false} ## (1) ## true | false
+    volumes:
+      - ./:/app
+    profiles: ["lint"]
+
+  algorithm-exercises-rust-dev:
+    image: algorithm-exercises-rust:dev
+    build:
+      context: .
+      target: development
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-info} ## (1) ## info | debug
+      BRUTEFORCE: ${BRUTEFORCE:-false} ## (1) ## true | false
+    volumes:
+      - ./:/app
+    profiles: ["development"]
+
+  algorithm-exercises-rust:
+    image: algorithm-exercises-rust:latest
+    build:
+      context: .
+      target: production
+    # volumes:
+    #   - ./:/app
+    profiles: ["production"]
+
+## REFERENCES:
+## (1) Passing Environment variable with fallback value:
+##    https://stackoverflow.com/a/70772707/6366150
+##
