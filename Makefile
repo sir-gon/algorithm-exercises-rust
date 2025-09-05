@@ -66,10 +66,12 @@ lint/yaml:
 lint: lint/markdown lint/yaml test/styling test/static
 
 test/static: dependencies
+	$(PACKAGE_MANAGER) clippy --all-features -- -D warnings
 
 test/styling: dependencies
 
 format:
+	$(PACKAGE_MANAGER) fix --allow-dirty --allow-staged --all-features
 
 test: env dependencies
 	$(PACKAGE_MANAGER) test
@@ -78,6 +80,8 @@ coverage: test
 	$(PACKAGE_MANAGER) llvm-cov --all-features --workspace --lcov --output-path lcov.info
 
 coverage/html:
+	$(PACKAGE_MANAGER) llvm-cov --html
+	open ./target/llvm-cov/html/index.html
 
 outdated:
 
