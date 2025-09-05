@@ -1,0 +1,40 @@
+---
+name: Markdown Lint
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: ["main"]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  markdownlint:
+    name: Markdown Lint
+    runs-on: ubuntu-24.04
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+        # See supported Node.js release schedule
+        # at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install -g markdownlint-cli
+
+      - name: Lint
+        run: >
+          markdownlint '**/*.md' --ignore node_modules
+          && echo '✔  Your code looks good.'
