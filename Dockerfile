@@ -122,8 +122,7 @@ RUN addgroup \
     --ingroup "$GROUPNAME" \
     --no-create-home \
     --uid "$UID" \
-    $USER
-
-RUN ls -alhR
+    "$USER" \
+&&  ls -alhR
 
 CMD ["make", "run"]
