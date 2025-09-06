@@ -5,24 +5,34 @@ ENV WORKDIR=/app
 WORKDIR ${WORKDIR}
 
 RUN apk add --update --no-cache make
-
+RUN apk add --update --no-cache musl-dev
 # cargo-chef to cache dependencies https://crates.io/crates/cargo-chef
+RUN cargo install cargo-chef
+
+COPY ./Makefile ${WORKDIR}/
+COPY ./src ${WORKDIR}/src
+COPY ./Cargo.lock ${WORKDIR}/Cargo.lock
+COPY ./Cargo.toml ${WORKDIR}/Cargo.toml
+RUN cargo chef prepare --recipe-path recipe.json
+
+FROM init AS cacher
+
+# COPY --from=init ${WORKDIR}/recipe.json recipe.json
+RUN cargo chef cook --release --recipe-path recipe.json
 
 ###############################################################################
 
 FROM init AS builder
 
-RUN apk add --no-cache musl-dev
-RUN cargo install cargo-chef
+ENV WORKDIR=/app
+WORKDIR ${WORKDIR}
 
 # sources
 COPY ./src ${WORKDIR}/src
-COPY ./Cargo.lock ${WORKDIR}/Cargo.lock
-COPY ./Cargo.toml ${WORKDIR}/Cargo.toml
-COPY ./Makefile ${WORKDIR}/
 
-# dependencies
-RUN make dependencies
+# Copy over the cached dependencies
+COPY --from=cacher ${WORKDIR}/target target
+COPY --from=cacher $CARGO_HOME $CARGO_HOME
 
 # build
 RUN ls -alhR && \
@@ -36,9 +46,10 @@ CMD ["make", "build"]
 
 FROM builder AS development
 
-# CMD []
+ENV WORKDIR=/app
+WORKDIR ${WORKDIR}
 
-CMD ["make", "build"]
+CMD []
 
 ###############################################################################
 
@@ -65,7 +76,6 @@ COPY ./.yamllint ${WORKDIR}/
 COPY ./.yamlignore ${WORKDIR}/
 COPY ./.gitignore ${WORKDIR}/
 
-RUN cargo chef cook --release --recipe-path recipe.json
 
 CMD ["make", "lint"]
 
