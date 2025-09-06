@@ -91,6 +91,7 @@ update: dependencies outdated
 upgrade:
 
 clean:
+	$(PACKAGE_MANAGER) clean
 	rm -vf lcov.info
 	rm -vf my-clippy-report.json
 	rm -vf sonar-issues.json
