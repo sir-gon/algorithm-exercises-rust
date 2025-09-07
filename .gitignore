@@ -1,20 +1,15 @@
-my-clippy-report.json
-sonar-issues.json
-
-lcov.info
-
+# Rust build artifacts
 /target
 
+# IDE-specific files
+.idea/
+.vscode/
 
-# Added by cargo
-#
-# already existing elements were commented out
+# Editor backup files
+*~
+*.bak
 
-#/target
-
-
-# Added by cargo
-#
-# already existing elements were commented out
-
-#/target
+# Coverage reports
+lcov.info
+my-clippy-report.json
+sonar-issues.json
