@@ -20,7 +20,7 @@ jobs:
       - name: Install Rust
         run: rustup update stable
       - name: Install cargo-llvm-cov
-        uses: taiki-e/install-action@cargo-llvm-cov
+        uses: taiki-e/install-action@7a9da991c71dfd905b2ee8252a9ce162f176dc6f
       - name: Install Clippy
         run: rustup component add clippy
       - name: Install cargo-sonar and run Clippy
@@ -59,12 +59,14 @@ jobs:
         with:
           name: coverage-report
 
+      # yamllint disable rule:line-length
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5
         with:
           files: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }} # required
           verbose: true # optional (default = false)
+          # yamllint enable rule:line-length
 
   sonarqube:
     name: SonarQube
@@ -80,8 +82,9 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: coverage-report
+      # yamllint disable rule:line-length
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        uses: SonarSource/sonarqube-scan-action@1a6d90ebcb0e6a6b1d87e37ba693fe453195ae25 # v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -89,3 +92,4 @@ jobs:
           args: >
             -Dsonar.externalIssuesReportPaths=sonar-issues.json
             -Dsonar.rust.clippy.reportPaths=my-clippy-report.json
+      # yamllint enable rule:line-length
