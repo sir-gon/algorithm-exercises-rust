@@ -125,4 +125,6 @@ RUN addgroup \
     "$USER" \
 &&  ls -alhR
 
+USER $USER
+
 CMD ["make", "run"]
