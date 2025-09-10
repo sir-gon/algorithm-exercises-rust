@@ -10,13 +10,13 @@ mod tests {
   use super::*;
 
   #[derive(Debug, Deserialize)]
-  struct SolveMeFirstTestCase {
+  struct CompareTripletsTestCase {
       a: Vec<i32>,
       b: Vec<i32>,
       expected: Vec<i32>
   }
 
-  static TEST_DATA: Lazy<Vec<SolveMeFirstTestCase>> =
+  static TEST_DATA: Lazy<Vec<CompareTripletsTestCase>> =
       Lazy::new(|| load_json("tests/data/hackerrank/warmup/compare_triplets.testcases.json"));
 
   #[test]
