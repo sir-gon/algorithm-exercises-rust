@@ -20,7 +20,7 @@ jobs:
       - name: Install Rust
         run: rustup update stable
       - name: Install cargo-llvm-cov
-        uses: taiki-e/install-action@7a9da991c71dfd905b2ee8252a9ce162f176dc6f
+        uses: taiki-e/install-action@26176d8d69a63a253d0afeccbbc05d9c8251c6e2
       - name: Install Clippy
         run: rustup component add clippy
       - name: Install cargo-sonar and run Clippy
