@@ -1,0 +1,7 @@
+[
+  {
+    "title": "Example",
+    "input": 6,
+    "expected": "     #\n    ##\n   ###\n  ####\n #####\n######"
+  }
+]
