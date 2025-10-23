@@ -5,19 +5,21 @@ pub fn mini_max_sum(arr: &[i32]) -> String {
     panic!("Empty input");
   }
 
-  let mut tsum = 0;
-  let mut tmin: i32 = arr[0];
-  let mut tmax: i32 = arr[1];
+  let mut tsum: i64 = 0;
+  let mut tmin: i64 = arr[0].into();
+  let mut tmax: i64 = arr[1].into();
+  let mut tvalue: i64;
 
   for value in arr.iter() {
-    tsum += *value;
+    tvalue = *value as i64;
+    tsum += tvalue;
 
-    if *value < tmin {
-      tmin = *value;
+    if tvalue < tmin {
+      tmin = tvalue;
     }
 
-    if *value > tmax {
-      tmax = *value;
+    if tvalue > tmax {
+      tmax = tvalue;
     }
   }
 

@@ -12,7 +12,8 @@ mod tests {
   #[derive(Debug, Deserialize)]
   struct MiniMaxSumTest {
       input: Vec<i32>,
-      expected: String
+      expected: String,
+      title: String
   }
 
   static TEST_DATA: Lazy<Vec<MiniMaxSumTest>> =
