@@ -10,12 +10,12 @@ mod tests {
   use super::*;
 
   #[derive(Debug, Deserialize)]
-  struct AveryBigSumTestCase {
+  struct StaircaseTestCase {
       input: i32,
       expected: String
   }
 
-  static TEST_DATA: Lazy<Vec<AveryBigSumTestCase>> =
+  static TEST_DATA: Lazy<Vec<StaircaseTestCase>> =
     Lazy::new(|| load_json("tests/data/hackerrank/warmup/staircase.testcases.json"));
 
   #[test]
