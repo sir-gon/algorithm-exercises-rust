@@ -37,7 +37,7 @@ jobs:
           --lcov
           --output-path lcov.info
       - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage-report
           path: |
@@ -56,7 +56,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download coverage artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: coverage-report
 
@@ -80,7 +80,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download coverage artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: coverage-report
       # yamllint disable rule:line-length
