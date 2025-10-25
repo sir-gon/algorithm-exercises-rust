@@ -4,6 +4,7 @@ use serde::Deserialize;
 
 use crate::common;
 use common::utils::load_json;
+use log::{warn};
 
 #[cfg(test)]
 mod tests {
@@ -26,7 +27,9 @@ mod tests {
     for test_case in TEST_DATA.iter() {
       let slice: &[i32] = &test_case.input;
       let result = mini_max_sum(slice);
-      miniMaxSum(slice);
+      // miniMaxSum(slice);
+
+      warn!("miniMaxSum ({}) result => {}" , test_case.title, result);
 
       assert_eq!(result, test_case.expected);
     }

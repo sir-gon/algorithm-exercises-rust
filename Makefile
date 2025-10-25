@@ -12,12 +12,12 @@
 ## (1) ## Allowed values: info | warn | error | debug
 LOG_LEVEL ?= info
 ## (3) (4)
-LOG_LEVEL :=$(shell echo '${LOG_LEVEL}'| tr '[:lower:]' '[:upper:]'| tr -d '[:blank:]')
+LOG_LEVEL :=$(shell echo '${LOG_LEVEL}'| tr '[:upper:]' '[:lower:]'| tr -d '[:blank:]')
 
 ## (1) ## Allowed values: true | false
 BRUTEFORCE ?= false
 ## (3) (4)
-BRUTEFORCE :=$(shell echo '${BRUTEFORCE}'| tr '[:lower:]' '[:upper:]'| tr -d '[:blank:]')
+BRUTEFORCE :=$(shell echo '${BRUTEFORCE}'| tr '[:upper:]' '[:lower:]'| tr -d '[:blank:]')
 
 # DOCKER
 DOCKER_COMPOSE=docker compose
@@ -83,7 +83,7 @@ format:
 	$(PACKAGE_MANAGER) fix --allow-dirty --allow-staged --all-features
 
 test: env dependencies
-	$(PACKAGE_MANAGER) test
+	RUST_LOG=${LOG_LEVEL} $(PACKAGE_MANAGER) test -- --nocapture
 
 coverage: test
 	$(PACKAGE_MANAGER) llvm-cov --all-features --workspace --lcov --output-path lcov.info

@@ -1,5 +1,11 @@
 // @link Problem definition [[docs/hackerrank/warmup/mini_max_sum.md]]
 
+#[cfg(not(test))]
+use log::{info}; // Use log crate when building application
+
+#[cfg(test)]
+use std::{println as info}; // Workaround to use prinltn! for logs.
+
 pub fn mini_max_sum(arr: &[i32]) -> String {
   if arr.is_empty() {
     panic!("Empty input");
@@ -28,7 +34,10 @@ pub fn mini_max_sum(arr: &[i32]) -> String {
   result
 }
 
-#[allow(non_snake_case)]
+#[allow(non_snake_case, reason = "Keeping original interface from HackerRank")]
 pub fn miniMaxSum(arr: &[i32]) {
-  print!("{}", mini_max_sum(arr))
+  let result = mini_max_sum(arr);
+
+  info!("miniMaxSum result => {}" , result);
+  println!("{}", mini_max_sum(arr))
 }
