@@ -28,7 +28,7 @@ mod tests {
       let result = mini_max_sum(slice);
       miniMaxSum(slice);
 
-      assert_eq!(result, test_case.expected);
+      assert_eq!(result, test_case.expected, "hackerrank::warmup::mini_max_sum::mini_max_sum() => {}", test_case.title);
     }
   }
 
