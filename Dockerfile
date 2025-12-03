@@ -93,7 +93,7 @@ CMD ["make", "test"]
 
 ###############################################################################
 
-FROM alpine:3.22 AS production
+FROM alpine:3.23 AS production
 
 ENV LOG_LEVEL=INFO
 ENV BRUTEFORCE=false
