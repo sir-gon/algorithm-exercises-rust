@@ -58,7 +58,7 @@ FROM builder AS lint
 RUN rustup component add clippy
 RUN \
   apk add --update --no-cache nodejs npm yamllint && \
-  npm install -g --ignore-scripts markdownlint-cli && \
+  npm install -g --ignore-scripts markdownlint-cli@0.47.0 && \
   rm -rf /var/lib/apt/lists/*
 
 # Code source
