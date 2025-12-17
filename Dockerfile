@@ -86,7 +86,7 @@ FROM development AS testing
 ENV WORKDIR=/app
 WORKDIR ${WORKDIR}
 
-RUN mkdir -p ${WORKDIR}/target
+RUN mkdir -p "${WORKDIR}"/target
 COPY --from=builder ${WORKDIR}/target/debug ${WORKDIR}/target
 
 CMD ["make", "test"]
