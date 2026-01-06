@@ -9,7 +9,7 @@
 # More details at https://github.com/rust-lang/rust-clippy
 # and https://rust-lang.github.io/rust-clippy/
 
-name: rust-clippy analyze
+name: Rust CI/CD Lint with Clippy
 
 on: # yamllint disable-line rule:truthy
   push:

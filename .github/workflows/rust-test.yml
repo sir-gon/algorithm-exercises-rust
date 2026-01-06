@@ -1,5 +1,5 @@
 ---
-name: Rust Test
+name: Rust CI/CD Test
 
 on: # yamllint disable-line rule:truthy
   push:

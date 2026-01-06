@@ -1,6 +1,7 @@
 # Algorithm Exercises (Rust 🦀)
 
-[![Rust on Linux CI Test](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust.yml)
+[![Rust CI/CD Test](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust-test.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust-test.yml)
+[![Rust CI/CD Lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust-clippy.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust-clippy.yml)
 [![Markdown Lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/markdown-lint.yml)
 [![YAML lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/yamllint.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/yamllint.yml)
 
