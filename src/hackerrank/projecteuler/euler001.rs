@@ -1,3 +1,5 @@
+// @link Problem definition [[docs/hackerrank/projecteuler/euler001.md]]
+
 // Function to find sum of Arithmetic Progression series
 pub fn sum_of_arithmetic_progression(n: i64, d: i64) -> i64 {
     // Number of terms
