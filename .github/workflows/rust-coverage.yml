@@ -16,7 +16,8 @@ jobs:
     env:
       CARGO_TERM_COLOR: always
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
       - name: Install Rust
         run: rustup update stable
       - name: Install Clippy
@@ -52,7 +53,8 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
         with:
           fetch-depth: 0
       - name: Download coverage artifact
@@ -76,7 +78,8 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
         with:
           fetch-depth: 0
       - name: Download coverage artifact
