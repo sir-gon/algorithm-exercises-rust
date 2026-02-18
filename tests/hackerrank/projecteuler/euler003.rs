@@ -24,7 +24,20 @@ mod tests {
 
         for test_case in TEST_DATA.iter() {
             let result = euler003(test_case.n);
-            assert_eq!(result, test_case.expected, "Failed for n = {}", test_case.n);
+            assert_eq!(
+                result,
+                Some(test_case.expected),
+                "Failed for n = {}",
+                test_case.n
+            );
         }
+    }
+
+    #[test]
+    fn test_euler003_edge_case() {
+        const INPUT: i64 = 0;
+        const EXPECTED: Option<i64> = None;
+        let result = euler003(INPUT);
+        assert_eq!(result, EXPECTED, "Failed for n = {}", INPUT);
     }
 }
