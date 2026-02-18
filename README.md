@@ -128,6 +128,31 @@ make compose/lint # optional
 make compose/test
 ``` -->
 
+### Setup for coverage and coverage/html
+
+Add following environment variables to .bashrr / .zshrc / etc...
+
+Linux / MacOS
+
+```bash
+export LLVM_COV=/path/to/llvm-cov
+export LLVM_PROFDATA=/path/to/llvm-profdata
+```
+
+Windows (PowerShell)
+
+```powershell
+$env:LLVM_COV="C:\path\to\llvm-cov.exe"
+$env:LLVM_PROFDATA="C:\path\to\llvm-profdata.exe"
+```
+
+Example (using homebrew llvm)
+
+```bash
+export LLVM_COV=/opt/homebrew/opt/llvm/bin/llvm-cov
+export LLVM_PROFDATA=/opt/homebrew/opt/llvm/bin/llvm-profdata
+```
+
 ## About development
 
 ```sh
@@ -158,6 +183,17 @@ rustup --version
 rustup 1.28.2 (e4f3ad6f8 2025-04-28)
 info: This is the version for the rustup toolchain manager, not the rustc compiler.
 info: The currently active `rustc` version is `rustc 1.89.0 (29483883e 2025-08-04)`
+```
+
+---
+
+```sh
+llvm-cov --version
+```
+
+```text
+Homebrew LLVM version 21.1.8
+  Optimized build.
 ```
 
 ## Algorithm excersices sources
