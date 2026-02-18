@@ -8,13 +8,14 @@ pub fn timeConversion(s: &str) -> String {
         .map(|part| part.parse::<u32>().unwrap())
         .collect();
 
-    if period == "AM" {
-        if time_parts[0] == 12 {
-            time_parts[0] = 0;
-        }
+    if period == "AM" && time_parts[0] == 12 {
+        time_parts[0] = 0;
     } else if time_parts[0] != 12 {
-      time_parts[0] += 12;
+        time_parts[0] += 12;
     }
 
-    format!("{:02}:{:02}:{:02}", time_parts[0], time_parts[1], time_parts[2])
+    format!(
+        "{:02}:{:02}:{:02}",
+        time_parts[0], time_parts[1], time_parts[2]
+    )
 }
