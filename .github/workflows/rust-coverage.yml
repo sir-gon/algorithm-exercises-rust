@@ -58,7 +58,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download coverage artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: coverage-report
 
@@ -83,7 +83,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download coverage artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: coverage-report
       # yamllint disable rule:line-length
