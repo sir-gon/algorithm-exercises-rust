@@ -1,14 +1,17 @@
 // @link Problem definition [[docs/hackerrank/interview_preparation_kit/arrays/new_year_chaos.md]]
 
 #[allow(non_snake_case)]
-pub fn minimumBribesCalculate(q: &[i32]) -> String  {
+pub fn minimumBribesCalculate(queue: &[i32]) -> String  {
     let mut bribes = 0;
-    for (i, &p) in q.iter().enumerate() {
-        if p - (i as i32 + 1) > 2 {
+
+    for (i, &value) in queue.iter().enumerate() {
+        let position = i as i32 + 1;
+
+        if value - position > 2 {
             return "Too chaotic".into();
         }
-        for j in (p - 2).max(0)..i as i32 {
-            if q[j as usize] > p {
+        for k in (value - 2).max(0)..position as i32 {
+            if queue[k as usize] > value {
                 bribes += 1;
             }
         }
