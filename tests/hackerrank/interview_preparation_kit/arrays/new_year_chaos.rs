@@ -7,7 +7,8 @@ use common::utils::load_json;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+
+use super::*;
 
     #[derive(Debug, Deserialize)]
     struct MinimumBribesTestCase {
@@ -32,4 +33,17 @@ mod tests {
             assert_eq!(result, test_case.expected);
         }
     }
+
+    #[test]
+    fn test_minimum_bribes_print() {
+      println!(
+          "Testing hackerrank::interview_preparation_kit::arrays::new_year_chaos::minimumBribes()"
+      );
+
+      let input : Vec<i32> = vec![2, 1, 5, 3, 4];
+      minimumBribes(input.as_slice());
+
+    }
+
+
 }
