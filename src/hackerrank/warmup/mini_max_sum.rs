@@ -23,9 +23,7 @@ pub fn mini_max_sum(arr: &[i32]) -> String {
     }
   }
 
-  let result = format!("{} {}", tsum - tmax, tsum - tmin);
-
-  result
+  format!("{} {}", tsum - tmax, tsum - tmin)
 }
 
 #[allow(non_snake_case)]
