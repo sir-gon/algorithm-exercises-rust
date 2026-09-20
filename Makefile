@@ -72,15 +72,25 @@ lint/markdown:
 lint/yaml:
 	yamllint --strict . && echo '✔  Your code looks good.'
 
-lint: lint/markdown lint/yaml test/styling test/static
+lint/json:
+	prettier --check ./**/*.json
+
+lint: test/styling test/static
+
+lint/all: lint/markdown lint/yaml lint/json test/styling test/static
 
 test/static: dependencies
 	$(PACKAGE_MANAGER) clippy --all-features -- -D warnings
 
 test/styling: dependencies
 
-format:
+format/sources:
 	$(PACKAGE_MANAGER) fix --allow-dirty --allow-staged --all-features
+
+format/json:
+	prettier --write ./**/*.json
+
+format: format/sources format/json
 
 test: env dependencies
 	$(PACKAGE_MANAGER) test
@@ -126,11 +136,26 @@ compose/rebuild: env
 	${DOCKER_COMPOSE} --profile testing build --no-cache
 	${DOCKER_COMPOSE} --profile production build
 
-compose/lint/markdown: compose/build
-	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make lint/markdown
+compose/lint/markdown:
+	${DOCKER_COMPOSE} --profile lint run --rm \
+    --workdir /workspace \
+    -v "$$(pwd):/workspace" \
+    markdownlint --config /workspace/.markdownlint.json '/workspace/**/*.md' \
+		&& echo '✔  Your code looks good.'
 
-compose/lint/yaml: compose/build
-	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make lint/yaml
+compose/lint/yaml:
+	${DOCKER_COMPOSE} --profile lint run --rm \
+    --workdir /workspace \
+    -v "$$(pwd):/workspace" \
+    yamllint --strict /workspace \
+		&& echo '✔  Your code looks good.'
+
+compose/lint/json:
+	${DOCKER_COMPOSE} --profile lint run --rm \
+    --workdir /workspace \
+    -v "$$(pwd):/workspace" \
+    prettier --check /workspace/**/*.json \
+		&& echo '✔  Your code looks good.'
 
 compose/test/styling: compose/build
 	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make test/styling
@@ -138,7 +163,7 @@ compose/test/styling: compose/build
 compose/test/static: compose/build
 	${DOCKER_COMPOSE} --profile lint run --rm algorithm-exercises-rust-lint make test/static
 
-compose/lint: compose/lint/markdown compose/lint/yaml compose/test/styling compose/test/static
+compose/lint: compose/lint/markdown compose/lint/yaml compose/lint/json compose/test/styling compose/test/static
 
 compose/test: compose/build
 	${DOCKER_COMPOSE} --profile testing run --rm algorithm-exercises-rust-test make test

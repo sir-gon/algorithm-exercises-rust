@@ -22,6 +22,27 @@ services:
       - ./:/app
     profiles: ["lint"]
 
+  markdownlint:
+    image: goncl/markdownlint-cli:latest
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    profiles: ["lint"]
+
+  yamllint:
+    image: goncl/yamllint:latest
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    profiles: ["lint"]
+
+  prettier:
+    image: goncl/prettier:3.9.8
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    profiles: ["lint"]
+
   algorithm-exercises-rust-dev:
     image: algorithm-exercises-rust:dev
     build:
