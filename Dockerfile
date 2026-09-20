@@ -56,10 +56,6 @@ CMD []
 FROM builder AS lint
 
 RUN rustup component add clippy
-RUN \
-  apk add --update --no-cache nodejs npm yamllint && \
-  npm install -g --ignore-scripts markdownlint-cli@0.49.1 && \
-  rm -rf /var/lib/apt/lists/*
 
 # Code source
 COPY ./src ${WORKDIR}/src
@@ -67,15 +63,6 @@ COPY ./Cargo.lock ${WORKDIR}/Cargo.lock
 COPY ./Cargo.toml ${WORKDIR}/Cargo.toml
 COPY ./recipe.json ${WORKDIR}/recipe.json
 COPY ./Makefile ${WORKDIR}/
-
-# markdownlint conf
-COPY ./.markdownlint.json ${WORKDIR}/
-
-# yamllint conf
-COPY ./.yamllint ${WORKDIR}/
-COPY ./.yamlignore ${WORKDIR}/
-COPY ./.gitignore ${WORKDIR}/
-
 
 CMD ["make", "lint"]
 
