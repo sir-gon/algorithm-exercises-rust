@@ -4,10 +4,8 @@ FROM ${BASE_IMAGE_VERSION} AS init
 ENV WORKDIR=/app
 WORKDIR ${WORKDIR}
 
-RUN apk add --update --no-cache make
-RUN apk add --update --no-cache musl-dev
-# cargo-chef to cache dependencies https://crates.io/crates/cargo-chef
-RUN cargo install cargo-chef
+RUN apk add --update --no-cache "make=4.4.1-r4" "musl-dev=1.2.6-r2" \
+  && cargo install cargo-chef
 
 COPY ./Makefile ${WORKDIR}/
 COPY ./src ${WORKDIR}/src
@@ -87,7 +85,7 @@ ENV BRUTEFORCE=false
 ENV WORKDIR=/app
 WORKDIR ${WORKDIR}
 
-RUN apk add --update --no-cache make
+RUN apk add --update --no-cache "make=4.4.1-r4"
 
 COPY ./Makefile ${WORKDIR}/
 COPY --from=builder ${WORKDIR}/target/release/lib*.rlib ${WORKDIR}/
@@ -112,6 +110,6 @@ RUN addgroup \
     "$USER" \
 &&  ls -alhR
 
-USER $USER
+USER 12345
 
 CMD ["make", "run"]
