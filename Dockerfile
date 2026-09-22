@@ -1,10 +1,11 @@
-ARG BASE_IMAGE_VERSION=rust:1.98.1-alpine3.24
-FROM ${BASE_IMAGE_VERSION} AS init
+FROM rust:1.98.1-alpine3.24 AS init
 
 ENV WORKDIR=/app
 WORKDIR ${WORKDIR}
 
-RUN apk add --update --no-cache "make=4.4.1-r4" "musl-dev=1.2.6-r2" \
+RUN apk add --update --no-cache \
+    "make=4.4.1-r4" \
+    "musl-dev=1.2.6-r2" \
   && cargo install cargo-chef
 
 COPY ./Makefile ${WORKDIR}/
