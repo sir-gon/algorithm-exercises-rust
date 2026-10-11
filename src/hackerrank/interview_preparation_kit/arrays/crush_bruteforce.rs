@@ -11,8 +11,8 @@ pub fn arrayManipulation(n: i32, queries: &[Vec<i32>]) -> i64 {
     let b = query[1] as usize;
     let k = query[2] as i64;
 
-    for i in a..=b {
-      result[i] += k;
+    for value in &mut result[a..=b] {
+      *value += k;
     }
   }
 
