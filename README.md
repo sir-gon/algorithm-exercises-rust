@@ -4,6 +4,7 @@
 [![Rust CI/CD Lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust-clippy.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/rust-clippy.yml)
 [![Markdown Lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/markdown-lint.yml)
 [![YAML lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/yamllint.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/yamllint.yml)
+[![JSON Prettier lint](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/prettier-json.yml/badge.svg)](https://github.com/sir-gon/algorithm-exercises-rust/actions/workflows/prettier-json.yml)
 
 ![GitHub](https://img.shields.io/github/license/sir-gon/algorithm-exercises-rust)
 ![GitHub language count](https://img.shields.io/github/languages/count/sir-gon/algorithm-exercises-rust)
@@ -15,6 +16,8 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=sir-gon_algorithm-exercises-rust&metric=bugs)](https://sonarcloud.io/summary/new_code?id=sir-gon_algorithm-exercises-rust)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=sir-gon_algorithm-exercises-rust&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=sir-gon_algorithm-exercises-rust)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=sir-gon_algorithm-exercises-rust&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=sir-gon_algorithm-exercises-rust)
+
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/15398/badge)](https://www.bestpractices.dev/projects/15398)
 
 ## TL;DR
 
