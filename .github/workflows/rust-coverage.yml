@@ -37,10 +37,38 @@ jobs:
         run: >
           make coverage/test
 
-      - name: Generate coverage report summary
-        run: >
-          make coverage/summary
+      # yamllint disable rule:line-length
+      - name: Generate coverage summary in GitHub job summary
+        run: |
+          cargo llvm-cov report --summary-only --json --output-path coverage-summary.json
 
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+
+          with open("coverage-summary.json") as f:
+              report = json.load(f)
+
+          rows = []
+          for bucket in report.get("data", []):
+              for item in bucket.get("files", []):
+                  filename = item.get("filename", "")
+                  summary = item.get("summary", {})
+                  rows.append((
+                      filename,
+                      summary.get("lines", {}).get("percent", 0.0),
+                      summary.get("functions", {}).get("percent", 0.0),
+                      summary.get("regions", {}).get("percent", 0.0),
+                  ))
+
+          print("## Coverage by file")
+          print("")
+          print("| File | Lines | Functions | Regions |")
+          print("| --- | ---: | ---: | ---: |")
+          for filename, lines, functions, regions in sorted(rows):
+              print(f"| {filename} | {lines:.1f}% | {functions:.1f}% | {regions:.1f}% |")
+          PY
+
+      # yamllint enable rule:line-length
       - name: Generate coverage report file
         run: >
           make coverage/report
