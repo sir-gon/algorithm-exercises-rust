@@ -30,7 +30,7 @@ PACKAGE_MANAGER=cargo
 # CGO_ENABLED=0
 
 .MAIN: test/coverage
-.PHONY: all build clean coverage dependencies env format help list test
+.PHONY: all build clean coverage coverage/test coverage/report dependencies env format help list test
 .EXPORT_ALL_VARIABLES: # (2)
 
 define crono
@@ -95,12 +95,30 @@ format: format/sources format/json
 test: env dependencies
 	$(PACKAGE_MANAGER) test
 
-coverage: test
-	$(PACKAGE_MANAGER) llvm-cov --all-features --workspace --lcov --output-path lcov.info
+coverage/test:
+	$(PACKAGE_MANAGER) llvm-cov --all-features --workspace --no-report
+
+coverage/summary:
+	$(PACKAGE_MANAGER) llvm-cov report --summary-only
+
+coverage/report:
+	$(PACKAGE_MANAGER) llvm-cov report --lcov --output-path lcov.info
+
+coverage:
+	$(MAKE) coverage/test
+	$(MAKE) coverage/summary
+	$(MAKE) coverage/report
 
 coverage/html:
-	$(PACKAGE_MANAGER) llvm-cov --html
-	open ./target/llvm-cov/html/index.html
+	$(PACKAGE_MANAGER) llvm-cov report --html
+
+	@if [ "$$(uname)" = "Darwin" ]; then \
+		open ./target/llvm-cov/html/index.html; \
+	elif [ "$$(uname | tr '[:upper:]' '[:lower:]')" = "mingw32" ] || [ "$$(uname | tr '[:upper:]' '[:lower:]')" = "mingw64" ] || [ "$$(uname | tr '[:upper:]' '[:lower:]')" = "cygwin" ]; then \
+		cmd /c start ./target/llvm-cov/html/index.html; \
+	else \
+		echo "Coverage HTML generated: ./target/llvm-cov/html/index.html"; \
+	fi
 
 outdated:
 
