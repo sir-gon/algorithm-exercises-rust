@@ -1,6 +1,6 @@
 FROM rust:1.99.1-alpine3.24 AS init
 
-ENV WORKDIR=/app
+ENV WORKDIR=/workspace
 WORKDIR ${WORKDIR}
 
 RUN apk add --update --no-cache \
@@ -16,14 +16,13 @@ RUN cargo chef prepare --recipe-path recipe.json
 
 FROM init AS cacher
 
-# COPY --from=init ${WORKDIR}/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 
 ###############################################################################
 
 FROM init AS builder
 
-ENV WORKDIR=/app
+ENV WORKDIR=/workspace
 WORKDIR ${WORKDIR}
 
 # sources
@@ -45,7 +44,7 @@ CMD ["make", "build"]
 
 FROM builder AS development
 
-ENV WORKDIR=/app
+ENV WORKDIR=/workspace
 WORKDIR ${WORKDIR}
 
 CMD []
@@ -69,11 +68,15 @@ CMD ["make", "lint"]
 
 FROM development AS testing
 
-ENV WORKDIR=/app
+ENV WORKDIR=/workspace
 WORKDIR ${WORKDIR}
 
 RUN mkdir -p "${WORKDIR}"/target
 COPY --from=builder ${WORKDIR}/target/debug ${WORKDIR}/target
+COPY ./tests ${WORKDIR}/tests
+
+RUN cargo install cargo-llvm-cov@0.9.1 \
+  && rustup component add llvm-tools-preview --toolchain 1.99.1-x86_64-unknown-linux-musl
 
 CMD ["make", "test"]
 
@@ -83,7 +86,7 @@ FROM alpine:3.24 AS production
 
 ENV LOG_LEVEL=INFO
 ENV BRUTEFORCE=false
-ENV WORKDIR=/app
+ENV WORKDIR=/workspace
 WORKDIR ${WORKDIR}
 
 RUN apk add --update --no-cache "make=4.4.1-r4"
