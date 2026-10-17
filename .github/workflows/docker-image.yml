@@ -166,7 +166,53 @@ jobs:
           docker
           compose --profile test
           run --rm ${{ env.IMAGE_NAME }}-test
-          make test
+          make coverage/test
+
+      # add this step in the `run-test` job, after the "Run test" step and before the "Test profiling: Upload artifact" step
+      - name: Fix permissions on target for artifact upload
+        run: |
+          # make directories traversable and files readable (safe, non-destructive)
+          sudo find ./target -type d -exec chmod 755 {} \; || true
+          sudo find ./target -type f -exec chmod 644 {} \; || true
+          # make sure executables keep execute bit if needed
+          sudo chmod -R a+rX ./target || true
+
+      - name: "Test profiling: Upload artifact"
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-target
+          path: ./target/
+
+  run-coverage:
+    name: "Run in docker: COVERAGE"
+    runs-on: ubuntu-26.04
+    needs: run-test
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Download artifact (docker image)
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ env.ARTIFACT_NAME }}_test
+          path: /tmp/
+
+      - name: Download artifact (test /target)
+        uses: actions/download-artifact@v8
+        with:
+          name: test-target
+          path: ./target/
+
+      - name: Load image
+        run: |
+          docker load --input /tmp/${{ env.ARTIFACT_NAME }}_test.tar
+          docker image ls -a
+
+      - name: Run test
+        run: >
+          docker
+          compose --profile test
+          run --rm ${{ env.IMAGE_NAME }}-test
+          make coverage/summary
 
   # yamllint disable rule:line-length
   # security:
