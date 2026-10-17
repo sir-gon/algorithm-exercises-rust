@@ -186,7 +186,10 @@ compose/lint: compose/test/styling compose/test/static
 compose/lint/all: compose/lint/markdown compose/lint/yaml compose/lint/json compose/test/styling compose/test/static
 
 compose/test: compose/build
-	${DOCKER_COMPOSE} --profile testing run --rm algorithm-exercises-rust-test make test
+	${DOCKER_COMPOSE} --profile testing run --rm algorithm-exercises-rust-test make coverage/test
+
+compose/coverage: compose/build
+	${DOCKER_COMPOSE} --profile testing run --rm algorithm-exercises-rust-test make coverage/summary
 
 compose/run: compose/build
 	${DOCKER_COMPOSE} --profile production run --rm algorithm-exercises-rust

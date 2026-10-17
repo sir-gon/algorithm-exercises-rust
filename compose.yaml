@@ -8,6 +8,8 @@ services:
     environment:
       LOG_LEVEL: ${LOG_LEVEL:-info} ## (1) ## info | debug
       BRUTEFORCE: ${BRUTEFORCE:-false} ## (1) ## true | false
+    volumes:
+      - ./:/workspace
     profiles: ["testing"]
 
   algorithm-exercises-rust-lint:
@@ -19,7 +21,7 @@ services:
     #   LOG_LEVEL: ${LOG_LEVEL:-info} ## (1) ## info | debug
     #   BRUTEFORCE: ${BRUTEFORCE:-false} ## (1) ## true | false
     volumes:
-      - ./:/app
+      - ./:/workspace
     profiles: ["lint"]
 
   markdownlint:
@@ -52,7 +54,7 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-info} ## (1) ## info | debug
       BRUTEFORCE: ${BRUTEFORCE:-false} ## (1) ## true | false
     volumes:
-      - ./:/app
+      - ./:/workspace
     profiles: ["development"]
 
   algorithm-exercises-rust:
@@ -61,7 +63,7 @@ services:
       context: .
       target: production
     # volumes:
-    #   - ./:/app
+    #   - ./:/workspace
     profiles: ["production"]
 
 ## REFERENCES:
