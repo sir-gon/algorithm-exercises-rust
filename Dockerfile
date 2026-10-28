@@ -5,7 +5,7 @@ WORKDIR ${WORKDIR}
 
 RUN apk add --update --no-cache \
     "make=4.4.1-r4" \
-    "musl-dev=1.2.6-r2" \
+    "musl-dev=1.2.6-r3" \
   && cargo install cargo-chef
 
 COPY ./Makefile ${WORKDIR}/
