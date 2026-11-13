@@ -1,4 +1,4 @@
-FROM rust:1.99.1-alpine3.24 AS init
+FROM rust:1.100.0-alpine3.24 AS init
 
 ENV WORKDIR=/workspace
 WORKDIR ${WORKDIR}
