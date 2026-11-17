@@ -14,9 +14,9 @@ pub fn euler003(n: i64) -> Option<i64> {
         if 0 == divisor % i {
             divisor /= i;
             max_prime_factor = Some(divisor);
+        } else {
+            i += 1;
         }
-
-        i += 1;
     }
 
     if max_prime_factor.is_none() {
