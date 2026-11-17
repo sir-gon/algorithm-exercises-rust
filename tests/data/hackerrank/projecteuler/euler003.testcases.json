@@ -4,6 +4,10 @@
     "expected": 5
   },
   {
+    "n": 64,
+    "expected": 2
+  },
+  {
     "n": 17,
     "expected": 17
   },
