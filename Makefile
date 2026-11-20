@@ -195,7 +195,7 @@ compose/run: compose/build
 	${DOCKER_COMPOSE} --profile production run --rm algorithm-exercises-rust
 
 all:
-	$(call crono, make clean; make dependencies; make build; make test; make lint; make coverage/html)
+	$(call crono, make clean; make dependencies; make build; make coverage; make lint; make coverage/html)
 
 run:
 	ls -alh
