@@ -37,24 +37,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-
-      - name: Install Rust toolchain
-        # @v1
-        uses: actions-rs/toolchain@88dc2356392166efad76775c878094f4e83ff746
-        with:
-          profile: minimal
-          toolchain: stable
-          components: clippy
-          override: true
-
       - name: Install required cargo
         run: cargo install clippy-sarif sarif-fmt
 
       # yamllint disable rule:line-length
       - name: Run rust-clippy
         run: >
-          cargo clippy
-          --all-features
+          cargo clippy --all-targets --all-features
           --message-format=json | clippy-sarif | tee rust-clippy-results.sarif | sarif-fmt
         continue-on-error: true
       # yamllint enable rule:line-length
