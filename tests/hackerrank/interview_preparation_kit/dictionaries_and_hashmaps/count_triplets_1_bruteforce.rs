@@ -1,4 +1,4 @@
-use exercises::hackerrank::interview_preparation_kit::dictionaries_and_hashmaps::count_triplets_1::countTriplets;
+use exercises::hackerrank::interview_preparation_kit::dictionaries_and_hashmaps::count_triplets_1_bruteforce::countTriplets;
 use once_cell::sync::Lazy;
 use serde::Deserialize;
 
